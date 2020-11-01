@@ -1,21 +1,25 @@
 package com.mxs.domain.user.facade;
 
+import com.mxs.dto.UserDto;
 import com.mxs.filter.UserFilter;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public final class UserFacade {
 
-    public void addUser(final UserModel userModel) {
+    public void addUser(final List<Optional<UserModel>> userModelOptionalList) {
 
     }
 
-    public UserModel findUser(final UserFilter userFilter) {
+    public List<UserDto> findUser(final UserFilter userFilter) {
         return null;
     }
 
-    public void updateUser(final UserModel userModel) {
+    public void updateUser(final Optional<UserModel> userModel) {
 
     }
 

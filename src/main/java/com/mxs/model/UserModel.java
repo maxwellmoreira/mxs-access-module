@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity(name = "user")
-public class UserModel extends EntityModel {
+public final class UserModel extends EntityModel {
 
     @Column(name = "username")
     private final String username;
