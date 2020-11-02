@@ -19,8 +19,8 @@ public interface UserControllerInPort {
     public List<UserDto> findUser(final @RequestBody UserFilter userFilter);
 
     @PutMapping(UPDATE)
-    public void updateUser(final @RequestBody UserDto userDto);
+    public void updateUser(final @RequestBody List<UserDto> userDtoList);
 
     @DeleteMapping(REMOVE)
-    public void removeUser(final @PathVariable Long code);
+    public void removeUser(final @RequestBody List<UserDto> userDtoList);
 }

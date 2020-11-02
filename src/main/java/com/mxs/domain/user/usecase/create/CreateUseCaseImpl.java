@@ -3,21 +3,21 @@ package com.mxs.domain.user.usecase.create;
 import com.mxs.domain.user.port.out.UserRepositoryOutPort;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class CreateUseCaseImpl implements CreateUseCase {
+import java.util.List;
+import java.util.Optional;
+
+public final class CreateUseCaseImpl implements CreateUseCase {
 
     @Autowired
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public void createUser(final UserModel userModel) {
-        if (userExists(userModel)) {
-        }
+    public void createUser(final List<Optional<UserModel>> userModelOptionalList) {
+        userModelOptionalList.stream().map(user -> usernameExists(user.get().getUsername()));
     }
 
-    private Boolean userExists(final UserModel userModel) {
-        return this.userRepositoryOutPort.userExists(userModel.getUsername(), userModel.getEmail());
+    private Boolean usernameExists(final String username) {
+        return this.userRepositoryOutPort.usernameExists(username);
     }
 }

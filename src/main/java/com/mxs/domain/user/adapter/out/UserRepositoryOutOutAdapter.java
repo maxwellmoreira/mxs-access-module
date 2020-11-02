@@ -32,7 +32,7 @@ public final class UserRepositoryOutOutAdapter implements UserRepositoryOutPort 
     }
 
     @Override
-    public Boolean userExists(String email, String username) {
+    public Boolean usernameExists(final String username) {
         return false;
     }
 }

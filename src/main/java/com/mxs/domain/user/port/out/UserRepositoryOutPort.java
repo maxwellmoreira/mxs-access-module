@@ -10,5 +10,5 @@ public interface UserRepositoryOutPort {
     public UserModel findUser(final UserFilter userFilter);
     public void updateUser(final UserModel userModel);
     public void removeUser(final Long code);
-    public Boolean userExists(final String email, final String username);
+    public Boolean usernameExists(final String username);
 }
