@@ -1,4 +1,4 @@
-package com.mxs.domain.user.facade;
+package com.mxs.facade;
 
 import com.mxs.domain.user.usecase.create.CreateUseCase;
 import com.mxs.domain.user.usecase.delete.DeleteUseCase;

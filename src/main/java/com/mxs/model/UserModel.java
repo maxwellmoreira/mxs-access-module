@@ -1,16 +1,9 @@
 package com.mxs.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-@Entity(name = "user")
 public final class UserModel extends EntityModel {
 
-    @Column(name = "username")
     private final String username;
-    @Column(name = "email")
     private final String email;
-    @Column(name = "password")
     private final String password;
 
     public UserModel(final String username,

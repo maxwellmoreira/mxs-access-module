@@ -1,7 +1,7 @@
 package com.mxs.converter;
 
 import com.mxs.dto.UserDto;
-import com.mxs.factory.ConverterFactory;
+import com.mxs.factory.converter.ConverterFactory;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 

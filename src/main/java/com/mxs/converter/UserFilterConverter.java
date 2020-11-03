@@ -1,6 +1,6 @@
 package com.mxs.converter;
 
-import com.mxs.factory.FilterConverterFactory;
+import com.mxs.factory.converter.FilterConverterFactory;
 import com.mxs.filter.UserFilter;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;

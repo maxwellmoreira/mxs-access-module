@@ -6,28 +6,29 @@ import com.mxs.model.UserModel;
 import com.mxs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public final class UserRepositoryOutOutAdapter implements UserRepositoryOutPort {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public void createUser(final UserModel userModel) {
-        this.userRepository.save(userModel);
+    public void createUser(final Optional<UserModel> userModelOptional) {
     }
 
     @Override
-    public UserModel findUser(final UserFilter userFilter) {
+    public Optional<UserModel> findUser(final UserFilter userFilter) {
         return null;
     }
 
     @Override
-    public void updateUser(final UserModel userModel) {
+    public void updateUser(final Optional<UserModel> userModelOptional) {
 
     }
 
     @Override
-    public void removeUser(final Long code) {
+    public void removeUser(final Optional<UserModel> userModelOptional) {
 
     }
 
