@@ -30,15 +30,15 @@ public final class UserFacade {
         this.createUseCase.createUser(userModelOptionalList);
     }
 
-    public List<Optional<UserModel>> readUser(final Optional<UserModel> userModelOptional) {
-        return this.readUseCase.readUser(userModelOptional);
+    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
+        return this.readUseCase.findUser(userModelOptional);
     }
 
     public void updateUser(final List<Optional<UserModel>> userModelOptionalList) {
         this.updateUseCase.updateUser(userModelOptionalList);
     }
 
-    public void deleteUser(final List<Optional<UserModel>> userModelOptionalList) {
-        this.deleteUseCase.deleteUser(userModelOptionalList);
+    public void removeUser(final List<Optional<UserModel>> userModelOptionalList) {
+        this.deleteUseCase.removeUser(userModelOptionalList);
     }
 }

@@ -16,21 +16,21 @@ public final class DeleteUseCaseImpl implements DeleteUseCase {
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public void deleteUser(List<Optional<UserModel>> userModelOptionalList) {
-        userModelOptionalList.stream().forEach(this::delete);
+    public void removeUser(final List<Optional<UserModel>> userModelOptionalList) {
+        userModelOptionalList.stream().forEach(this::remove);
     }
 
-    private void delete(final Optional<UserModel> userModelOptional) {
+    private void remove(final Optional<UserModel> userModelOptional) {
         userModelOptional.ifPresent(user -> {
-            if (userExists(user.getUsername())) {
-                throw new ResourceExistsException(CodeExceptionType.EXISTS, MessageExceptionType.USER_EXISTS);
-            } else {
+            if (userExists(userModelOptional)) {
                 this.userRepositoryOutPort.removeUser(userModelOptional);
+            } else {
+                throw new ResourceExistsException(CodeExceptionType.NOT_FOUND, MessageExceptionType.USER_NOT_FOUND);
             }
         });
     }
 
-    private Boolean userExists(final String username) {
-        return false;
+    private Boolean userExists(final Optional<UserModel> userModelOptional) {
+        return this.userRepositoryOutPort.userExists(userModelOptional);
     }
 }

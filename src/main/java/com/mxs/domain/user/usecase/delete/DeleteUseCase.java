@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Component
 public interface DeleteUseCase {
-    public void deleteUser(final List<Optional<UserModel>> userModelOptionalList);
+    public void removeUser(final List<Optional<UserModel>> userModelOptionalList);
 }

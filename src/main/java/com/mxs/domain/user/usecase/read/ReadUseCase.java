@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Component
 public interface ReadUseCase {
-    public List<Optional<UserModel>> readUser(final Optional<UserModel> userModelOptional);
+    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional);
 }

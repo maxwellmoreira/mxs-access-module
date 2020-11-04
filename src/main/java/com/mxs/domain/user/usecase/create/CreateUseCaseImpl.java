@@ -23,7 +23,7 @@ public final class CreateUseCaseImpl implements CreateUseCase {
     private void create(final Optional<UserModel> userModelOptional) {
         userModelOptional.ifPresent(user -> {
             if (usernameExists(user.getUsername())) {
-                throw new ResourceExistsException(CodeExceptionType.EXISTS, MessageExceptionType.USER_EXISTS);
+                throw new ResourceExistsException(CodeExceptionType.EXISTS, MessageExceptionType.USERNAME_EXISTS);
             } else {
                 this.userRepositoryOutPort.createUser(userModelOptional);
             }

@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public final class UserControllerInInAdapter implements UserControllerInPort {
+public final class UserCrudControllerInAdapter implements UserControllerInPort {
 
     @Autowired
     private UserConverter userConverter;
@@ -33,7 +33,7 @@ public final class UserControllerInInAdapter implements UserControllerInPort {
 
         List<UserDto> userDtoList =
                 this.userConverter.convertToDtoList(
-                        this.userFacade.readUser(
+                        this.userFacade.findUser(
                                 this.userFilterConverter.convertToModel(userFilter)));
 
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
@@ -46,6 +46,6 @@ public final class UserControllerInInAdapter implements UserControllerInPort {
 
     @Override
     public void removeUser(final List<UserDto> userDtoList) {
-        this.userFacade.deleteUser(this.userConverter.convertToModelList(userDtoList));
+        this.userFacade.removeUser(this.userConverter.convertToModelList(userDtoList));
     }
 }
