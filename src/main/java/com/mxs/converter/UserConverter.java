@@ -14,19 +14,23 @@ public final class UserConverter implements ConverterFactory<UserDto, UserModel>
 
     @Override
     public UserDto convertToDto(final Optional<UserModel> userModelOptional) {
-        return new UserDto(
-                userModelOptional.map(UserModel::getUsername).orElse(null),
-                userModelOptional.map(UserModel::getEmail).orElse(null),
-                userModelOptional.map(UserModel::getPassword).orElse(null));
+        return new UserDto
+                .Builder()
+                .username(userModelOptional.map(UserModel::getUsername).orElse(null))
+                .email(userModelOptional.map(UserModel::getEmail).orElse(null))
+                .password(userModelOptional.map(UserModel::getPassword).orElse(null))
+                .build();
     }
 
     @Override
     public Optional<UserModel> convertToModel(final UserDto userDto) {
         return Optional.of(
-                new UserModel(
-                        userDto.getUsername(),
-                        userDto.getEmail(),
-                        userDto.getPassword()));
+                new UserModel.
+                        Builder().
+                        username(userDto.getUsername()).
+                        email(userDto.getEmail()).
+                        password(userDto.getPassword()).
+                        build());
     }
 
     @Override

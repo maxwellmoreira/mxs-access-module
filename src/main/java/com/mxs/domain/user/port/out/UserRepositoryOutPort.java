@@ -1,6 +1,5 @@
 package com.mxs.domain.user.port.out;
 
-import com.mxs.filter.UserFilter;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Repository;
 

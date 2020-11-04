@@ -25,7 +25,7 @@ public final class UpdateUseCaseImpl implements UpdateUseCase {
             if (userExists(userModelOptional)) {
                 this.userRepositoryOutPort.updateUser(userModelOptional);
             } else {
-                throw new ResourceExistsException(CodeExceptionType.NOT_FOUND, MessageExceptionType.USER_NOT_FOUND);
+                throw new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND);
             }
         });
     }

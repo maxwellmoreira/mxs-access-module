@@ -18,7 +18,7 @@ public final class ReadUseCaseImpl implements ReadUseCase {
     @Override
     public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
         if (userModelOptional.isEmpty()) {
-            throw new ResourceExistsException(CodeExceptionType.IS_NULL, MessageExceptionType.USER_IS_NULL);
+            throw new ResourceExistsException(MessageExceptionType.USER_IS_NULL);
         }
         return find(userModelOptional);
     }

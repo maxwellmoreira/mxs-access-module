@@ -25,7 +25,7 @@ public final class DeleteUseCaseImpl implements DeleteUseCase {
             if (userExists(userModelOptional)) {
                 this.userRepositoryOutPort.removeUser(userModelOptional);
             } else {
-                throw new ResourceExistsException(CodeExceptionType.NOT_FOUND, MessageExceptionType.USER_NOT_FOUND);
+                throw new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND);
             }
         });
     }

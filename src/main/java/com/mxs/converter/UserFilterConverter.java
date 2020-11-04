@@ -1,7 +1,7 @@
 package com.mxs.converter;
 
-import com.mxs.factory.converter.FilterConverterFactory;
 import com.mxs.filter.UserFilter;
+import com.mxs.factory.converter.FilterConverterFactory;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +12,11 @@ public final class UserFilterConverter implements FilterConverterFactory<UserFil
     @Override
     public Optional<UserModel> convertToModel(final UserFilter userFilter) {
         return Optional.of(
-                new UserModel(
-                        userFilter.getUsername(),
-                        userFilter.getEmail(),
-                        userFilter.getPassword()));
+                new UserModel.
+                        Builder().
+                        username(userFilter.getUsername()).
+                        email(userFilter.getEmail()).
+                        password(userFilter.getPassword()).
+                        build());
     }
 }
