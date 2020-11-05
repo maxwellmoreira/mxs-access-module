@@ -13,6 +13,7 @@ import static com.mxs.constant.UriControllerConstant.*;
 @RestController
 @RequestMapping(USERS)
 public interface UserControllerInPort {
+
     @PostMapping(ADD)
     public void addUser(final @RequestBody List<UserDto> userDtoList);
 
