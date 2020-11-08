@@ -1,11 +1,11 @@
 package com.mxs.domain.user.adapter.in;
 
-import com.mxs.converter.UserConverter;
-import com.mxs.converter.UserFilterConverter;
+import com.mxs.domain.user.converter.UserConverter;
+import com.mxs.domain.user.converter.UserFilterConverter;
 import com.mxs.domain.user.port.in.UserControllerInPort;
-import com.mxs.dto.UserDto;
-import com.mxs.facade.UserFacade;
-import com.mxs.filter.UserFilter;
+import com.mxs.domain.user.dto.UserDto;
+import com.mxs.domain.user.facade.UserFacade;
+import com.mxs.domain.user.filter.UserFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

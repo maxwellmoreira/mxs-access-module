@@ -1,4 +1,4 @@
-package com.mxs.filter;
+package com.mxs.domain.user.filter;
 
 public final class UserFilter {
 

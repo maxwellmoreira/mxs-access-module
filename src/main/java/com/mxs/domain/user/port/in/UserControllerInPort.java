@@ -1,7 +1,7 @@
 package com.mxs.domain.user.port.in;
 
-import com.mxs.dto.UserDto;
-import com.mxs.filter.UserFilter;
+import com.mxs.domain.user.dto.UserDto;
+import com.mxs.domain.user.filter.UserFilter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.mxs.dto;
+package com.mxs.domain.user.dto;
 
 public final class UserDto {
 

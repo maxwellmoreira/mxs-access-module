@@ -1,8 +1,8 @@
 package com.mxs.domain.user.adapter.out;
 
 import com.mxs.domain.user.port.out.UserRepositoryOutPort;
+import com.mxs.domain.user.repository.UserRepository;
 import com.mxs.model.UserModel;
-import com.mxs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,6 +15,7 @@ public final class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void createUser(final Optional<UserModel> userModelOptional) {
+        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
     }
 
     @Override
@@ -24,19 +25,21 @@ public final class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void updateUser(final Optional<UserModel> userModelOptional) {
+        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
     }
 
     @Override
     public void removeUser(final Optional<UserModel> userModelOptional) {
+        userModelOptional.ifPresent(userModel -> this.userRepository.delete(userModel));
     }
 
     @Override
-    public Boolean usernameExists(final String username) {
-        return false;
+    public List<Optional<UserModel>> findByUsername(final String username) {
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public Boolean userExists(Optional<UserModel> userModelOptional) {
-        return null;
+    public List<Optional<UserModel>> findByUsernameAndEmail(final String username, final String email) {
+        return this.userRepository.findByUsernameAndEmail(username, email);
     }
 }

@@ -12,6 +12,6 @@ public interface UserRepositoryOutPort {
     public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional);
     public void updateUser(final Optional<UserModel> userModelOptional);
     public void removeUser(final Optional<UserModel> userModelOptional);
-    public Boolean usernameExists(final String username);
-    public Boolean userExists(final Optional<UserModel> userModelOptional);
+    public List<Optional<UserModel>> findByUsername(final String username);
+    public List<Optional<UserModel>> findByUsernameAndEmail(final String username, final String email);
 }

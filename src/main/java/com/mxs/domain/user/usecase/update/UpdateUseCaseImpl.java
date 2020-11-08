@@ -2,7 +2,6 @@ package com.mxs.domain.user.usecase.update;
 
 import com.mxs.domain.user.port.out.UserRepositoryOutPort;
 import com.mxs.exception.ResourceExistsException;
-import com.mxs.factory.type.CodeExceptionType;
 import com.mxs.factory.type.MessageExceptionType;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public final class UpdateUseCaseImpl implements UpdateUseCase {
 
     private void update(final Optional<UserModel> userModelOptional) {
         userModelOptional.ifPresent(user -> {
-            if (userExists(userModelOptional)) {
+            if (userExists(user)) {
                 this.userRepositoryOutPort.updateUser(userModelOptional);
             } else {
                 throw new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND);
@@ -30,7 +29,8 @@ public final class UpdateUseCaseImpl implements UpdateUseCase {
         });
     }
 
-    private Boolean userExists(final Optional<UserModel> userModelOptional) {
-        return this.userRepositoryOutPort.userExists(userModelOptional);
+    private Boolean userExists(final UserModel userModel) {
+        return !this.userRepositoryOutPort.findByUsernameAndEmail(
+                userModel.getUsername(), userModel.getEmail()).isEmpty();
     }
 }

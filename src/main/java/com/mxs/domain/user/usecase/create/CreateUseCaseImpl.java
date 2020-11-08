@@ -30,6 +30,6 @@ public final class CreateUseCaseImpl implements CreateUseCase {
     }
 
     private Boolean usernameExists(final String username) {
-        return this.userRepositoryOutPort.usernameExists(username);
+        return !this.userRepositoryOutPort.findByUsername(username).isEmpty();
     }
 }

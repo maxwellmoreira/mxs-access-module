@@ -1,9 +1,16 @@
 package com.mxs.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity(name = "user")
 public final class UserModel extends EntityModel {
 
+    @Column(name = "username", nullable=false)
     private final String username;
+    @Column(name = "email", nullable=false)
     private final String email;
+    @Column(name = "password", nullable=false)
     private final String password;
 
     private UserModel(final Builder builder) {
