@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ResourceExistsException extends RuntimeException {
+public final class ResourceExistsException extends RuntimeException {
     public ResourceExistsException(final MessageExceptionType messageExceptionType) {
         super(messageExceptionType.getCode());
     }

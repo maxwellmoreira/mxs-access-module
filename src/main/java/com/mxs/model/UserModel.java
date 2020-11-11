@@ -6,18 +6,14 @@ import javax.persistence.Entity;
 @Entity(name = "user")
 public final class UserModel extends EntityModel {
 
-    @Column(name = "username", nullable=false)
-    private final String username;
-    @Column(name = "email", nullable=false)
-    private final String email;
-    @Column(name = "password", nullable=false)
-    private final String password;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-    private UserModel(final Builder builder) {
-        this.username = builder.username;
-        this.email = builder.email;
-        this.password = builder.password;
-    }
+    public UserModel() { }
 
     public String getUsername() {
         return username;
@@ -29,6 +25,12 @@ public final class UserModel extends EntityModel {
 
     public String getPassword() {
         return password;
+    }
+
+    private UserModel(final Builder builder) {
+        this.username = builder.username;
+        this.email = builder.email;
+        this.password = builder.password;
     }
 
     public final static class Builder {

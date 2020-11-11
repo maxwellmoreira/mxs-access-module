@@ -2,16 +2,18 @@ package com.mxs.domain.user.adapter.in;
 
 import com.mxs.domain.user.converter.UserConverter;
 import com.mxs.domain.user.converter.UserFilterConverter;
-import com.mxs.domain.user.port.in.UserControllerInPort;
 import com.mxs.domain.user.dto.UserDto;
 import com.mxs.domain.user.facade.UserFacade;
 import com.mxs.domain.user.filter.UserFilter;
+import com.mxs.domain.user.port.in.UserControllerInPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 public final class UserCrudControllerInAdapter implements UserControllerInPort {
 
     @Autowired

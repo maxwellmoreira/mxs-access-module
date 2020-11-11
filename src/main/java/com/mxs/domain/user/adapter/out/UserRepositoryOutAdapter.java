@@ -4,11 +4,13 @@ import com.mxs.domain.user.port.out.UserRepositoryOutPort;
 import com.mxs.domain.user.repository.UserRepository;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public final class UserRepositoryOutAdapter implements UserRepositoryOutPort {
+@Repository
+public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Autowired
     private UserRepository userRepository;

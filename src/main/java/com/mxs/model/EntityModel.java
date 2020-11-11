@@ -13,23 +13,37 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class EntityModel {
-    @Column(name = "id", nullable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creationDate", nullable = false)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
     @UpdateTimestamp
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "lastUpdateDate", nullable = false)
+    @Column(name = "last_update_date", nullable = false)
     private Date lastUpdateDate;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "statusType", nullable = false)
+    @Column(name = "status_type", nullable = false)
+    private String status;
+    @Transient
     private StatusType statusType;
 
-    public EntityModel() {
+    @PrePersist
+    public void onPrePersist() {
+        this.status = StatusType.ACTIVE.getCode();
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.status = statusType.getCode();
+    }
+
+    @PostLoad
+    void fillTransient() {
+        this.statusType = StatusType.of(status);
     }
 
     public Long getId() {

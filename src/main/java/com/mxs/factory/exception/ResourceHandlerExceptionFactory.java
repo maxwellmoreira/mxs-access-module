@@ -12,27 +12,30 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public final class ResourceHandlerExceptionFactory {
+
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handlerNotFoundException(final MessageExceptionType messageExceptionType) {
+    public ResponseEntity<ResourceExceptionFactory> handlerNotFoundException(
+            final ResourceNotFoundException resourceNotFoundException) {
         ResourceExceptionFactory resourceException =
                 new ResourceExceptionFactory
                         .Builder()
-                        .codeExceptionType(CodeExceptionType.NOT_FOUND)
-                        .messageExceptionType(messageExceptionType)
-                        .categoryExceptionType(CategoryExceptionType.BUSINESS)
+                        .codeExceptionType(CodeExceptionType.NOT_FOUND.getCode())
+                        .messageExceptionType(MessageExceptionType.of(resourceNotFoundException.getMessage()).getCode())
+                        .categoryExceptionType(CategoryExceptionType.BUSINESS.getCode())
                         .build();
-        return new ResponseEntity<>(resourceException, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ResourceExceptionFactory>(resourceException, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ResourceExistsException.class)
-    public ResponseEntity<?> handlerExistsException(final MessageExceptionType messageExceptionType) {
+    public ResponseEntity<ResourceExceptionFactory> handlerExistsException(
+            final ResourceExistsException resourceExistsException) {
         ResourceExceptionFactory resourceException =
                 new ResourceExceptionFactory
                         .Builder()
-                        .codeExceptionType(CodeExceptionType.EXISTS)
-                        .messageExceptionType(messageExceptionType)
-                        .categoryExceptionType(CategoryExceptionType.BUSINESS)
+                        .codeExceptionType(CodeExceptionType.EXISTS.getCode())
+                        .messageExceptionType(MessageExceptionType.of(resourceExistsException.getMessage()).getCode())
+                        .categoryExceptionType(CategoryExceptionType.BUSINESS.getCode())
                         .build();
-        return new ResponseEntity<>(resourceException, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ResourceExceptionFactory>(resourceException, HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,51 +1,44 @@
 package com.mxs.factory.exception;
 
-import com.mxs.factory.type.CategoryExceptionType;
-import com.mxs.factory.type.CodeExceptionType;
-import com.mxs.factory.type.MessageExceptionType;
-
 public final class ResourceExceptionFactory {
 
-    private final CodeExceptionType codeExceptionType;
-    private final MessageExceptionType messageExceptionType;
-    private final CategoryExceptionType categoryExceptionType;
+    private final String code;
+    private final String message;
+    private final String category;
+
+    public String getCode() { return code; }
+
+    public String getMessage() { return message; }
+
+    public String getCategory() { return category; }
 
     private ResourceExceptionFactory(final Builder entityExceptionBuilder) {
-        this.codeExceptionType = entityExceptionBuilder.codeExceptionType;
-        this.messageExceptionType = entityExceptionBuilder.messageExceptionType;
-        this.categoryExceptionType = entityExceptionBuilder.categoryExceptionType;
+        this.code = entityExceptionBuilder.code;
+        this.message = entityExceptionBuilder.message;
+        this.category = entityExceptionBuilder.category;
     }
-
-    public CodeExceptionType getCodeExceptionType() {
-        return codeExceptionType;
-    }
-
-    public MessageExceptionType getMessageExceptionType() {
-        return messageExceptionType;
-    }
-
-    public CategoryExceptionType getCategoryExceptionType() { return categoryExceptionType; }
 
     public static class Builder {
 
-        private CodeExceptionType codeExceptionType;
-        private MessageExceptionType messageExceptionType;
-        private CategoryExceptionType categoryExceptionType;
+        private String code;
+        private String message;
+        private String category;
 
-        public Builder() { }
+        public Builder() {
+        }
 
-        public Builder codeExceptionType(final CodeExceptionType codeExceptionType) {
-            this.codeExceptionType = codeExceptionType;
+        public Builder codeExceptionType(final String code) {
+            this.code = code;
             return this;
         }
 
-        public Builder messageExceptionType(final MessageExceptionType messageExceptionType) {
-            this.messageExceptionType = messageExceptionType;
+        public Builder messageExceptionType(final String message) {
+            this.message = message;
             return this;
         }
 
-        public Builder categoryExceptionType(final CategoryExceptionType categoryExceptionType) {
-            this.categoryExceptionType = categoryExceptionType;
+        public Builder categoryExceptionType(final String category) {
+            this.category = category;
             return this;
         }
 

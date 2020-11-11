@@ -1,11 +1,12 @@
 package com.mxs.factory.type;
 
+import java.util.stream.Stream;
+
 public enum MessageExceptionType {
 
     USER_EXISTS("User already registered."),
     USERNAME_EXISTS("Username already registered."),
-    USER_NOT_FOUND("User not found."),
-    USER_IS_NULL("User is null.");
+    USER_NOT_FOUND("User not found.");
 
     private final String code;
 
@@ -15,5 +16,12 @@ public enum MessageExceptionType {
 
     public String getCode() {
         return code;
+    }
+
+    public static MessageExceptionType of(final String message) {
+        return Stream.of(MessageExceptionType.values())
+                .filter(s -> s.getCode().equals(message))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

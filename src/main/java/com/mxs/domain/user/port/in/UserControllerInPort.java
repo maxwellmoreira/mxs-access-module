@@ -10,7 +10,6 @@ import java.util.List;
 import static com.mxs.constant.ModelControllerConstant.USERS;
 import static com.mxs.constant.UriControllerConstant.*;
 
-@RestController
 @RequestMapping(USERS)
 public interface UserControllerInPort {
 
