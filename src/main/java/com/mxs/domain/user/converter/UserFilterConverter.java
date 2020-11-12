@@ -16,7 +16,7 @@ public final class UserFilterConverter implements FilterConverterFactory<UserFil
                         Builder().
                         username(Optional.ofNullable(userFilter.getUsername()).orElse(null)).
                         email(Optional.ofNullable(userFilter.getEmail()).orElse(null)).
-                        password(Optional.ofNullable(userFilter.getPassword()).orElse(null)).
+                        status(Optional.ofNullable(userFilter.getStatus()).orElse(null)).
                         build());
     }
 }

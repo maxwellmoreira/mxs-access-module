@@ -2,6 +2,7 @@ package com.mxs.domain.user.adapter.out;
 
 import com.mxs.domain.user.port.out.UserRepositoryOutPort;
 import com.mxs.domain.user.repository.UserRepository;
+import com.mxs.domain.user.repository.UserSpecificationRepository;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,8 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
+        UserSpecificationRepository userSpecificationRepository = new UserSpecificationRepository(userModelOptional.get());
+        List<UserModel> userModelList = this.userRepository.findAll(userSpecificationRepository);
         return null;
     }
 
