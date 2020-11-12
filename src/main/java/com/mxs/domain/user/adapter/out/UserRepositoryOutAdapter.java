@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
@@ -18,24 +19,26 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void createUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.get());
+        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
     }
 
     @Override
     public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
-        UserSpecificationRepository userSpecificationRepository = new UserSpecificationRepository(userModelOptional.get());
-        List<UserModel> userModelList = this.userRepository.findAll(userSpecificationRepository);
-        return null;
+        return this.userRepository
+                .findAll(new UserSpecificationRepository(userModelOptional))
+                .stream()
+                .map(Optional::of)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void updateUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.get());
+        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
     }
 
     @Override
     public void removeUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.delete(userModelOptional.get());
+        userModelOptional.ifPresent(userModel -> this.userRepository.delete(userModel));
     }
 
     @Override

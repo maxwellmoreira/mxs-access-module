@@ -18,6 +18,7 @@ public enum StatusType {
     }
 
     public static StatusType of(final String status) {
+        if (status == null) { return null; }
         return Stream.of(StatusType.values())
                 .filter(s -> s.getCode().equals(status))
                 .findFirst()

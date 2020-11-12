@@ -12,11 +12,11 @@ public final class UserFilterConverter implements FilterConverterFactory<UserFil
     @Override
     public Optional<UserModel> convertToModel(final UserFilter userFilter) {
         return Optional.of(
-                new UserModel.
-                        Builder().
-                        username(Optional.ofNullable(userFilter.getUsername()).orElse(null)).
-                        email(Optional.ofNullable(userFilter.getEmail()).orElse(null)).
-                        status(Optional.ofNullable(userFilter.getStatus()).orElse(null)).
-                        build());
+                new UserModel
+                        .Builder()
+                        .username(Optional.ofNullable(userFilter.getUsername()).orElse(null))
+                        .email(Optional.ofNullable(userFilter.getEmail()).orElse(null))
+                        .status(Optional.ofNullable(userFilter.getStatus()).orElse(null))
+                        .build());
     }
 }

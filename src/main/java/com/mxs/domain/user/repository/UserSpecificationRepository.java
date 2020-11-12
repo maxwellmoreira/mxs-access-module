@@ -1,5 +1,6 @@
 package com.mxs.domain.user.repository;
 
+import com.mxs.factory.type.StatusType;
 import com.mxs.model.UserModel;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -11,10 +12,10 @@ import java.util.Optional;
 
 public class UserSpecificationRepository implements Specification<UserModel> {
 
-    private UserModel userModel;
+    private Optional<UserModel> userModelOptional;
 
-    public UserSpecificationRepository(final UserModel userModel) {
-        this.userModel = userModel;
+    public UserSpecificationRepository(final Optional<UserModel> userModelOptional) {
+        this.userModelOptional = userModelOptional;
     }
 
     @Override
@@ -24,32 +25,29 @@ public class UserSpecificationRepository implements Specification<UserModel> {
 
         Predicate predicate = criteriaBuilder.conjunction();
 
-        Optional.ofNullable(this.userModel.getUsername())
-                .stream()
-                .findFirst()
+        this.userModelOptional
+                .map(UserModel::getUsername)
                 .ifPresent(username -> {
                     if (!username.isBlank())
                         predicate.getExpressions()
-                                .add(criteriaBuilder.like(root.get("username"), "%" + this.userModel.getUsername() + "%"));
+                                .add(criteriaBuilder.like(root.get("username"), "%" + username + "%"));
                 });
 
-        Optional.ofNullable(this.userModel.getEmail())
-                .stream()
-                .findFirst()
+        this.userModelOptional
+                .map(UserModel::getEmail)
                 .ifPresent(email -> {
                     if (!email.isBlank())
                         predicate.getExpressions()
-                            .add(criteriaBuilder.like(root.get("email"), "%" + this.userModel.getEmail() + "%"));
+                                .add(criteriaBuilder.like(root.get("email"), "%" + email + "%"));
                 });
 
-        Optional.ofNullable(this.userModel.getStatusType().getCode())
-                .stream()
-                .findFirst()
-                .ifPresent(status -> {
-                    if (!status.isBlank()) {
+        this.userModelOptional
+                .map(UserModel::getStatusType)
+                .map(StatusType::getCode)
+                .ifPresent(code -> {
+                    if (!code.isBlank())
                         predicate.getExpressions()
-                                .add(criteriaBuilder.equal(root.get("status"), this.userModel.getStatusType().getCode()));
-                    }
+                                .add(criteriaBuilder.equal(root.get("status"), code));
                 });
 
         return predicate;
