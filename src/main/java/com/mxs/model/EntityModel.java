@@ -31,14 +31,24 @@ public abstract class EntityModel {
     @Transient
     private StatusType statusType;
 
+    public EntityModel() {
+    }
+
+    public EntityModel(final Long id,
+                       final Date creationDate,
+                       final Date lastUpdateDate,
+                       final StatusType statusType,
+                       final String status) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.statusType = statusType;
+        this.status = status;
+    }
+
     @PrePersist
     public void onPrePersist() {
         this.status = StatusType.ACTIVE.getCode();
-    }
-
-    @PreUpdate
-    public void onPreUpdate() {
-        this.status = statusType.getCode();
     }
 
     @PostLoad

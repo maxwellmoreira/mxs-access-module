@@ -1,4 +1,4 @@
-package com.mxs.exception;
+package com.mxs.factory.exception;
 
 import com.mxs.factory.type.MessageExceptionType;
 import org.springframework.http.HttpStatus;

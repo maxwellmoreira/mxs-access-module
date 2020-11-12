@@ -1,4 +1,4 @@
-package com.mxs.constant;
+package com.mxs.factory.constant;
 
 public class UseCaseConstant {
     private static final String UC_CRUD_CREATE = "UC_CRUD_CREATE";

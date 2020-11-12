@@ -1,7 +1,10 @@
 package com.mxs.model;
 
+import com.mxs.factory.type.StatusType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.Date;
 
 @Entity(name = "user")
 public final class UserModel extends EntityModel {
@@ -13,7 +16,7 @@ public final class UserModel extends EntityModel {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public UserModel() { }
+    public UserModel() { super(); }
 
     public String getUsername() {
         return username;
@@ -27,7 +30,10 @@ public final class UserModel extends EntityModel {
         return password;
     }
 
+    public StatusType getStatusType() { return super.getStatusType(); }
+
     private UserModel(final Builder builder) {
+        super(builder.id, builder.creationDate, builder.lastUpdateDate, StatusType.of(builder.status), builder.status);
         this.username = builder.username;
         this.email = builder.email;
         this.password = builder.password;
@@ -35,11 +41,34 @@ public final class UserModel extends EntityModel {
 
     public final static class Builder {
 
+        private Long id;
+        private Date creationDate;
+        private Date lastUpdateDate;
+        private String status;
         private String username;
         private String email;
         private String password;
 
-        public Builder() {
+        public Builder() { }
+
+        public Builder id(final Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder creationDate(final Date creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        public Builder lastUpdateDate(final Date lastUpdateDate) {
+            this.lastUpdateDate = lastUpdateDate;
+            return this;
+        }
+
+        public Builder status(final String status) {
+            this.status = status;
+            return this;
         }
 
         public Builder username(final String username) {

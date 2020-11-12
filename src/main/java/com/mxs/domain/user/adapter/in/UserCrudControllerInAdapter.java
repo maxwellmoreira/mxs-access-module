@@ -3,7 +3,7 @@ package com.mxs.domain.user.adapter.in;
 import com.mxs.domain.user.converter.UserConverter;
 import com.mxs.domain.user.converter.UserFilterConverter;
 import com.mxs.domain.user.dto.UserDto;
-import com.mxs.domain.user.facade.UserFacade;
+import com.mxs.facade.UserFacade;
 import com.mxs.domain.user.filter.UserFilter;
 import com.mxs.domain.user.port.in.UserControllerInPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
                         this.userFacade.findUser(
                                 this.userFilterConverter.convertToModel(userFilter)));
 
-        return new ResponseEntity<>(userDtoList, HttpStatus.OK);
+        return new ResponseEntity<List<UserDto>>(userDtoList, HttpStatus.OK);
     }
 
     @Override

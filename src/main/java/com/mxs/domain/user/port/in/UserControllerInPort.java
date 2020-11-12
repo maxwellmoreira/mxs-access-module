@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.mxs.constant.ModelControllerConstant.USERS;
-import static com.mxs.constant.UriControllerConstant.*;
+import static com.mxs.factory.constant.ModelControllerConstant.USERS;
 
 @RequestMapping(USERS)
 public interface UserControllerInPort {
 
-    @PostMapping(ADD)
+    @PostMapping
     public void addUser(final @RequestBody List<UserDto> userDtoList);
 
-    @GetMapping(FIND)
+    @GetMapping
     public ResponseEntity<List<UserDto>> findUser(final @RequestBody UserFilter userFilter);
 
-    @PutMapping(UPDATE)
+    @PutMapping
     public void updateUser(final @RequestBody List<UserDto> userDtoList);
 
-    @DeleteMapping(REMOVE)
+    @DeleteMapping
     public void removeUser(final @RequestBody List<UserDto> userDtoList);
 }

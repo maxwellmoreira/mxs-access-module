@@ -1,7 +1,5 @@
 package com.mxs.factory.exception;
 
-import com.mxs.exception.ResourceExistsException;
-import com.mxs.exception.ResourceNotFoundException;
 import com.mxs.factory.type.CategoryExceptionType;
 import com.mxs.factory.type.CodeExceptionType;
 import com.mxs.factory.type.MessageExceptionType;

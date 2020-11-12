@@ -1,7 +1,7 @@
 package com.mxs.domain.user.usecase.delete;
 
 import com.mxs.domain.user.port.out.UserRepositoryOutPort;
-import com.mxs.exception.ResourceExistsException;
+import com.mxs.factory.exception.ResourceExistsException;
 import com.mxs.factory.type.MessageExceptionType;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +22,16 @@ public final class DeleteUseCaseImpl implements DeleteUseCase {
     }
 
     private void remove(final Optional<UserModel> userModelOptional) {
-        userModelOptional.ifPresent(user -> {
-            if (userExists(user)) {
-                this.userRepositoryOutPort.removeUser(userModelOptional);
-            } else {
-                throw new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND);
-            }
-        });
+        Optional<UserModel> userFounded = findUserByUsernameAndEmail(userModelOptional);
+        this.userRepositoryOutPort.removeUser(userFounded);
     }
 
-    private Boolean userExists(final UserModel userModel) {
-        return !this.userRepositoryOutPort.findByUsernameAndEmail(
-                userModel.getUsername(),
-                userModel.getEmail()).isEmpty();
+    private Optional<UserModel> findUserByUsernameAndEmail(final Optional<UserModel> userModelOptional) {
+        return userModelOptional.map(userModel ->
+                this.userRepositoryOutPort.findByUsernameAndEmail(userModel.getUsername(), userModel.getEmail()))
+                .stream()
+                .filter(user -> user.isPresent())
+                .findFirst()
+                .orElseThrow(() -> new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND));
     }
 }

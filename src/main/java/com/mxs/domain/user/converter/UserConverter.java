@@ -2,6 +2,7 @@ package com.mxs.domain.user.converter;
 
 import com.mxs.domain.user.dto.UserDto;
 import com.mxs.factory.converter.ConverterFactory;
+import com.mxs.factory.type.StatusType;
 import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public final class UserConverter implements ConverterFactory<UserDto, UserModel>
                 .username(userModelOptional.map(UserModel::getUsername).orElse(null))
                 .email(userModelOptional.map(UserModel::getEmail).orElse(null))
                 .password(userModelOptional.map(UserModel::getPassword).orElse(null))
+                .status(userModelOptional.map(UserModel::getStatusType).map(StatusType::getCode).orElse(null))
                 .build();
     }
 
@@ -27,9 +29,10 @@ public final class UserConverter implements ConverterFactory<UserDto, UserModel>
         return Optional.of(
                 new UserModel.
                         Builder().
-                        username(userDto.getUsername()).
-                        email(userDto.getEmail()).
-                        password(userDto.getPassword()).
+                        username(Optional.ofNullable(userDto.getUsername()).orElse(null)).
+                        email(Optional.ofNullable(userDto.getEmail()).orElse(null)).
+                        password(Optional.ofNullable(userDto.getPassword()).orElse(null)).
+                        status(Optional.ofNullable(userDto.getStatus()).orElse(null)).
                         build());
     }
 

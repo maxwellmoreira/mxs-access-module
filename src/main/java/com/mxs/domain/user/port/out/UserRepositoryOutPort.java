@@ -14,7 +14,7 @@ public interface UserRepositoryOutPort {
 
     public void removeUser(final Optional<UserModel> userModelOptional);
 
-    public List<Optional<UserModel>> findByUsername(final String username);
+    public Optional<UserModel> findByUsername(final String username);
 
-    public List<Optional<UserModel>> findByUsernameAndEmail(final String username, final String email);
+    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
 }

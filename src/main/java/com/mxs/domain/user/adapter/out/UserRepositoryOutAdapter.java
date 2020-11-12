@@ -17,7 +17,7 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void createUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
+        this.userRepository.save(userModelOptional.get());
     }
 
     @Override
@@ -27,21 +27,21 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void updateUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional.ifPresent(userModel -> this.userRepository.save(userModel));
+        this.userRepository.save(userModelOptional.get());
     }
 
     @Override
     public void removeUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional.ifPresent(userModel -> this.userRepository.delete(userModel));
+        this.userRepository.delete(userModelOptional.get());
     }
 
     @Override
-    public List<Optional<UserModel>> findByUsername(final String username) {
+    public Optional<UserModel> findByUsername(final String username) {
         return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public List<Optional<UserModel>> findByUsernameAndEmail(final String username, final String email) {
+    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email) {
         return this.userRepository.findByUsernameAndEmail(username, email);
     }
 }
