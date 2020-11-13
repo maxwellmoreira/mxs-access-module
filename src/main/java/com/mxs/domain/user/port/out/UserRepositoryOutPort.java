@@ -17,4 +17,8 @@ public interface UserRepositoryOutPort {
     public Optional<UserModel> findByUsername(final String username);
 
     public Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
+
+    public Optional<UserModel> findByUsernameAndPassword(final String username, final String password);
+
+    public Optional<UserModel> findByEmail(final String email);
 }
