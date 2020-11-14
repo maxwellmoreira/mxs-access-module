@@ -3,6 +3,7 @@ package com.mxs.facade;
 import com.mxs.domain.user.usecase.create.CreateUseCase;
 import com.mxs.domain.user.usecase.delete.DeleteUseCase;
 import com.mxs.domain.user.usecase.login.LoginUseCase;
+import com.mxs.domain.user.usecase.password.PasswordUseCase;
 import com.mxs.domain.user.usecase.read.ReadUseCase;
 import com.mxs.domain.user.usecase.update.UpdateUseCase;
 import com.mxs.model.UserModel;
@@ -30,6 +31,9 @@ public final class UserFacade {
     @Autowired
     private LoginUseCase loginUseCase;
 
+    @Autowired
+    private PasswordUseCase passwordUseCase;
+
     public void createUser(final List<Optional<UserModel>> userModelOptionalList) {
         this.createUseCase.createUser(userModelOptionalList);
     }
@@ -48,5 +52,9 @@ public final class UserFacade {
 
     public Optional<UserModel> login(final Optional<UserModel> userModelOptional) {
         return this.loginUseCase.login(userModelOptional);
+    }
+
+    public void changePassword(final Optional<UserModel> userModelView) {
+        this.passwordUseCase.changePassword(userModelView);
     }
 }
