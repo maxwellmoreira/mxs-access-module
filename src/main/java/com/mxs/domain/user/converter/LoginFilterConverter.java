@@ -15,7 +15,7 @@ public final class LoginFilterConverter implements FilterConverterFactory<LoginF
                 new UserModel
                         .Builder()
                         .username(Optional.ofNullable(loginFilter.getUsername()).orElse(null))
-                        .email(Optional.ofNullable(loginFilter.getPassword()).orElse(null))
+                        .password(Optional.ofNullable(loginFilter.getPassword()).orElse(null))
                         .build());
     }
 }
