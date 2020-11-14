@@ -1,8 +1,10 @@
 package com.mxs.domain.user.adapter.in;
 
+import com.mxs.domain.user.converter.LoginFilterConverter;
 import com.mxs.domain.user.converter.UserConverter;
 import com.mxs.domain.user.converter.UserFilterConverter;
 import com.mxs.domain.user.dto.UserDto;
+import com.mxs.domain.user.filter.LoginFilter;
 import com.mxs.facade.UserFacade;
 import com.mxs.domain.user.filter.UserFilter;
 import com.mxs.domain.user.port.in.UserControllerInPort;
@@ -23,6 +25,9 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     private UserFilterConverter userFilterConverter;
 
     @Autowired
+    private LoginFilterConverter loginFilterConverter;
+
+    @Autowired
     private UserFacade userFacade;
 
     @Override
@@ -33,7 +38,7 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     @Override
     public ResponseEntity<List<UserDto>> findUser(final UserFilter userFilter) {
 
-        List<UserDto> userDtoList =
+        final List<UserDto> userDtoList =
                 this.userConverter.convertToDtoList(
                         this.userFacade.findUser(
                                 this.userFilterConverter.convertToModel(userFilter)));
@@ -49,5 +54,16 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     @Override
     public void removeUser(final List<UserDto> userDtoList) {
         this.userFacade.removeUser(this.userConverter.convertToModelList(userDtoList));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> login(final LoginFilter loginFilter) {
+
+        final UserDto userDto =
+                this.userConverter.convertToDto(
+                        this.userFacade.login(
+                                this.loginFilterConverter.convertToModel(loginFilter)));
+
+        return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
     }
 }

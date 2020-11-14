@@ -1,6 +1,7 @@
 package com.mxs.domain.user.port.in;
 
 import com.mxs.domain.user.dto.UserDto;
+import com.mxs.domain.user.filter.LoginFilter;
 import com.mxs.domain.user.filter.UserFilter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.mxs.factory.constant.ModelControllerConstant.USERS;
+import static com.mxs.factory.constant.UriControllerConstant.LOGIN;
 
 @RequestMapping(USERS)
 public interface UserControllerInPort {
@@ -23,4 +25,7 @@ public interface UserControllerInPort {
 
     @DeleteMapping
     public void removeUser(final @RequestBody List<UserDto> userDtoList);
+
+    @GetMapping(LOGIN)
+    public ResponseEntity<UserDto> login(final @RequestBody LoginFilter loginFilter);
 }

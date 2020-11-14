@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LoginUseCaseImpl implements LoginUseCase {
+public final class LoginUseCaseImpl implements LoginUseCase {
 
     @Autowired
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public Optional<UserModel> login(Optional<UserModel> userModelOptional) {
+    public Optional<UserModel> login(final Optional<UserModel> userModelOptional) {
         return userModelOptional.map(userModel ->
                 this.userRepositoryOutPort.findByUsernameAndPassword(userModel.getUsername(), userModel.getPassword()))
                 .stream()

@@ -19,7 +19,7 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void createUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.orElseThrow(IllegalArgumentException::new));
+        this.userRepository.save(userModelOptional.get());
     }
 
     @Override
@@ -33,41 +33,31 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void updateUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.orElseThrow(IllegalArgumentException::new));
+        this.userRepository.save(userModelOptional.get());
     }
 
     @Override
     public void removeUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.delete(userModelOptional.orElseThrow(IllegalArgumentException::new));
+        this.userRepository.delete(userModelOptional.get());
     }
 
     @Override
     public Optional<UserModel> findByUsername(final String username) {
-        return Optional
-                .of(username)
-                .map(u -> this.userRepository.findByUsername(u))
-                .orElseThrow(IllegalArgumentException::new);
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
     public Optional<UserModel> findByUsernameAndEmail(final String username, final String email) {
-        return this.userRepository.findByUsernameAndEmail(
-                Optional.of(username).orElseThrow(IllegalArgumentException::new),
-                Optional.of(email).orElseThrow(IllegalArgumentException::new));
+        return this.userRepository.findByUsernameAndEmail(username, email);
     }
 
     @Override
     public Optional<UserModel> findByUsernameAndPassword(final String username, final String password) {
-        return this.userRepository.findByUsernameAndPassword(
-                Optional.of(username).orElseThrow(IllegalArgumentException::new),
-                Optional.of(password).orElseThrow(IllegalArgumentException::new));
+        return this.userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override
     public Optional<UserModel> findByEmail(final String email) {
-        return Optional
-                .of(email)
-                .map(e -> this.userRepository.findByEmail(e))
-                .orElseThrow(IllegalArgumentException::new);
+        return this.userRepository.findByEmail(email);
     }
 }
