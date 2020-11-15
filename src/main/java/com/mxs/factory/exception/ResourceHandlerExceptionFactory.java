@@ -36,4 +36,17 @@ public final class ResourceHandlerExceptionFactory {
                         .build();
         return new ResponseEntity<ResourceExceptionFactory>(resourceException, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ResourceExceptionFactory> handlerIllegalArgumentException(
+            final IllegalArgumentException illegalArgumentException) {
+        ResourceExceptionFactory resourceException =
+                new ResourceExceptionFactory
+                        .Builder()
+                        .codeExceptionType(CodeExceptionType.ILLEGAL_ARGUMENT.getCode())
+                        .messageExceptionType(MessageExceptionType.ILLEGAL_ARGUMENT.getCode())
+                        .categoryExceptionType(CategoryExceptionType.ILLEGAL.getCode())
+                        .build();
+        return new ResponseEntity<ResourceExceptionFactory>(resourceException, HttpStatus.BAD_REQUEST);
+    }
 }

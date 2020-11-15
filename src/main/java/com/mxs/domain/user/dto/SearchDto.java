@@ -1,15 +1,17 @@
-package com.mxs.domain.user.filter;
+package com.mxs.domain.user.dto;
 
-public final class ChangePasswordFilter {
+public final class SearchDto {
 
     private final String username;
     private final String email;
-    private final String password;
+    private final String status;
 
-    public ChangePasswordFilter(final String username, final String email, final String password) {
+    public SearchDto(final String username,
+                     final String email,
+                     final String status) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.status = status;
     }
 
     public String getUsername() {
@@ -20,19 +22,19 @@ public final class ChangePasswordFilter {
         return email;
     }
 
-    public String getPassword() { return password; }
+    public String getStatus() { return status; }
 
-    private ChangePasswordFilter(final Builder builder) {
+    private SearchDto(final Builder builder) {
         this.username = builder.username;
         this.email = builder.email;
-        this.password = builder.password;
+        this.status = builder.status;
     }
 
     public final static class Builder {
 
         private String username;
         private String email;
-        private String password;
+        private String status;
 
         public Builder() { }
 
@@ -46,13 +48,13 @@ public final class ChangePasswordFilter {
             return this;
         }
 
-        public Builder password(final String password) {
-            this.password = password;
+        public Builder status(final String status) {
+            this.status = status;
             return this;
         }
 
-        public ChangePasswordFilter build() {
-            return new ChangePasswordFilter(this);
+        public SearchDto build() {
+            return new SearchDto(this);
         }
     }
 }

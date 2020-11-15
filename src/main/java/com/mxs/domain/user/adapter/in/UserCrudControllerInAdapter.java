@@ -1,14 +1,13 @@
 package com.mxs.domain.user.adapter.in;
 
 import com.mxs.domain.user.converter.ChangePasswordConverter;
-import com.mxs.domain.user.converter.LoginFilterConverter;
+import com.mxs.domain.user.converter.LoginConverter;
 import com.mxs.domain.user.converter.UserConverter;
-import com.mxs.domain.user.converter.UserFilterConverter;
-import com.mxs.domain.user.dto.UserDto;
-import com.mxs.domain.user.filter.ChangePasswordFilter;
-import com.mxs.domain.user.filter.LoginFilter;
+import com.mxs.domain.user.converter.SearchConverter;
+import com.mxs.domain.user.dto.ChangePasswordDto;
+import com.mxs.domain.user.dto.LoginDto;
 import com.mxs.facade.UserFacade;
-import com.mxs.domain.user.filter.UserFilter;
+import com.mxs.domain.user.dto.SearchDto;
 import com.mxs.domain.user.port.in.UserControllerInPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +23,10 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     private UserConverter userConverter;
 
     @Autowired
-    private UserFilterConverter userFilterConverter;
+    private SearchConverter userFilterConverter;
 
     @Autowired
-    private LoginFilterConverter loginFilterConverter;
+    private LoginConverter loginFilterConverter;
 
     @Autowired
     private ChangePasswordConverter changePasswordConverter;
@@ -36,44 +35,44 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     private UserFacade userFacade;
 
     @Override
-    public void addUser(final List<UserDto> userDtoList) {
+    public void addUser(final List<com.mxs.domain.user.dto.UserDto> userDtoList) {
         this.userFacade.createUser(userConverter.convertToModelList(userDtoList));
     }
 
     @Override
-    public ResponseEntity<List<UserDto>> findUser(final UserFilter userFilter) {
+    public ResponseEntity<List<com.mxs.domain.user.dto.UserDto>> findUser(final SearchDto userFilter) {
 
-        final List<UserDto> userDtoList =
+        final List<com.mxs.domain.user.dto.UserDto> userDtoList =
                 this.userConverter.convertToDtoList(
                         this.userFacade.findUser(
                                 this.userFilterConverter.convertToModel(userFilter)));
 
-        return new ResponseEntity<List<UserDto>>(userDtoList, HttpStatus.OK);
+        return new ResponseEntity<List<com.mxs.domain.user.dto.UserDto>>(userDtoList, HttpStatus.OK);
     }
 
     @Override
-    public void updateUser(final List<UserDto> userDtoList) {
+    public void updateUser(final List<com.mxs.domain.user.dto.UserDto> userDtoList) {
         this.userFacade.updateUser(this.userConverter.convertToModelList(userDtoList));
     }
 
     @Override
-    public void removeUser(final List<UserDto> userDtoList) {
+    public void removeUser(final List<com.mxs.domain.user.dto.UserDto> userDtoList) {
         this.userFacade.removeUser(this.userConverter.convertToModelList(userDtoList));
     }
 
     @Override
-    public ResponseEntity<UserDto> login(final LoginFilter loginFilter) {
+    public ResponseEntity<com.mxs.domain.user.dto.UserDto> login(final LoginDto loginFilter) {
 
-        final UserDto userDto =
+        final com.mxs.domain.user.dto.UserDto userDto =
                 this.userConverter.convertToDto(
                         this.userFacade.login(
                                 this.loginFilterConverter.convertToModel(loginFilter)));
 
-        return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+        return new ResponseEntity<com.mxs.domain.user.dto.UserDto>(userDto, HttpStatus.OK);
     }
 
     @Override
-    public void changePassword(final ChangePasswordFilter changePasswordFilter) {
+    public void changePassword(final ChangePasswordDto changePasswordFilter) {
         this.userFacade.changePassword(this.changePasswordConverter.convertToModel(changePasswordFilter));
     }
 }

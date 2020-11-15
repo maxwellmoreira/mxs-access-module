@@ -2,7 +2,8 @@ package com.mxs.factory.type;
 
 public enum CategoryExceptionType {
     BUSINESS("BUSINESS"),
-    INFRASTRUCTURE("INFRASTRUCTURE");
+    INFRASTRUCTURE("INFRASTRUCTURE"),
+    ILLEGAL("ILLEGAL");
 
     private final String code;
 

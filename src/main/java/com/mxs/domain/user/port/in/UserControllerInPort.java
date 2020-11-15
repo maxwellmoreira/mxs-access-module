@@ -1,9 +1,8 @@
 package com.mxs.domain.user.port.in;
 
-import com.mxs.domain.user.dto.UserDto;
-import com.mxs.domain.user.filter.ChangePasswordFilter;
-import com.mxs.domain.user.filter.LoginFilter;
-import com.mxs.domain.user.filter.UserFilter;
+import com.mxs.domain.user.dto.ChangePasswordDto;
+import com.mxs.domain.user.dto.LoginDto;
+import com.mxs.domain.user.dto.SearchDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,20 +16,20 @@ import static com.mxs.factory.constant.UriControllerConstant.LOGIN;
 public interface UserControllerInPort {
 
     @PostMapping
-    public void addUser(final @RequestBody List<UserDto> userDtoList);
+    public void addUser(final @RequestBody List<com.mxs.domain.user.dto.UserDto> userDtoList);
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> findUser(final @RequestBody UserFilter userFilter);
+    public ResponseEntity<List<com.mxs.domain.user.dto.UserDto>> findUser(final @RequestBody SearchDto userFilter);
 
     @PutMapping
-    public void updateUser(final @RequestBody List<UserDto> userDtoList);
+    public void updateUser(final @RequestBody List<com.mxs.domain.user.dto.UserDto> userDtoList);
 
     @DeleteMapping
-    public void removeUser(final @RequestBody List<UserDto> userDtoList);
+    public void removeUser(final @RequestBody List<com.mxs.domain.user.dto.UserDto> userDtoList);
 
     @GetMapping(LOGIN)
-    public ResponseEntity<UserDto> login(final @RequestBody LoginFilter loginFilter);
+    public ResponseEntity<com.mxs.domain.user.dto.UserDto> login(final @RequestBody LoginDto loginFilter);
 
     @PutMapping(CHANGE_PASSWORD)
-    public void changePassword(final @RequestBody ChangePasswordFilter changePasswordFilter);
+    public void changePassword(final @RequestBody ChangePasswordDto changePasswordFilter);
 }

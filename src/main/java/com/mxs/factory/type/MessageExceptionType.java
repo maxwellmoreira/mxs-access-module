@@ -6,7 +6,8 @@ public enum MessageExceptionType {
 
     USER_EXISTS("User already registered."),
     USERNAME_EXISTS("Username already registered."),
-    USER_NOT_FOUND("User not found.");
+    USER_NOT_FOUND("User not found."),
+    ILLEGAL_ARGUMENT("An unexpected error occurred due to an invalid entry.");
 
     private final String code;
 

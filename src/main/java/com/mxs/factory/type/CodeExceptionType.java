@@ -4,7 +4,7 @@ public enum CodeExceptionType {
 
     EXISTS("0001"),
     NOT_FOUND("0002"),
-    IS_NULL("0003");
+    ILLEGAL_ARGUMENT("0003");
 
     private final String code;
 
