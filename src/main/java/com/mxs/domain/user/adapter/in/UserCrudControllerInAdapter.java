@@ -4,11 +4,8 @@ import com.mxs.domain.user.converter.ChangePasswordConverter;
 import com.mxs.domain.user.converter.LoginConverter;
 import com.mxs.domain.user.converter.UserConverter;
 import com.mxs.domain.user.converter.SearchConverter;
-import com.mxs.domain.user.dto.ChangePasswordDto;
-import com.mxs.domain.user.dto.LoginDto;
-import com.mxs.domain.user.dto.UserDto;
+import com.mxs.domain.user.dto.*;
 import com.mxs.facade.UserFacade;
-import com.mxs.domain.user.dto.SearchDto;
 import com.mxs.domain.user.port.in.UserControllerInPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,5 +72,10 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
     @Override
     public void changePassword(final ChangePasswordDto changePasswordFilter) {
         this.userFacade.changePassword(this.changePasswordConverter.convertToModel(changePasswordFilter));
+    }
+
+    @Override
+    public void recoverAccess(final RecoverAccessDto recoverAccessDto) {
+        //this.userFacade.recoverAccess();
     }
 }

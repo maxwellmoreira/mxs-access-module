@@ -1,11 +1,13 @@
 package com.mxs.facade;
 
+import com.mxs.domain.user.dto.RecoverAccessDto;
 import com.mxs.domain.user.usecase.create.CreateUseCase;
 import com.mxs.domain.user.usecase.delete.DeleteUseCase;
 import com.mxs.domain.user.usecase.login.LoginUseCase;
 import com.mxs.domain.user.usecase.password.PasswordUseCase;
 import com.mxs.domain.user.usecase.read.ReadUseCase;
 import com.mxs.domain.user.usecase.update.UpdateUseCase;
+import com.mxs.factory.type.RecoveryType;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +58,9 @@ public final class UserFacade {
 
     public void changePassword(final Optional<UserModel> userModelView) {
         this.passwordUseCase.changePassword(userModelView);
+    }
+
+    public void recoverAccess(final Optional<UserModel> userModelView, final RecoveryType recoveryType) {
+
     }
 }
