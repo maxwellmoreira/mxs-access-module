@@ -1,9 +1,6 @@
 package com.mxs.domain.user.adapter.in;
 
-import com.mxs.domain.user.converter.ChangePasswordConverter;
-import com.mxs.domain.user.converter.LoginConverter;
-import com.mxs.domain.user.converter.UserConverter;
-import com.mxs.domain.user.converter.SearchConverter;
+import com.mxs.domain.user.converter.*;
 import com.mxs.domain.user.dto.*;
 import com.mxs.facade.UserFacade;
 import com.mxs.domain.user.port.in.UserControllerInPort;
@@ -28,6 +25,9 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
 
     @Autowired
     private ChangePasswordConverter changePasswordConverter;
+
+    @Autowired
+    private RecoverAccessConverter recoverAccessConverter;
 
     @Autowired
     private UserFacade userFacade;
@@ -76,6 +76,7 @@ public final class UserCrudControllerInAdapter implements UserControllerInPort {
 
     @Override
     public void recoverAccess(final RecoverAccessDto recoverAccessDto) {
-        //this.userFacade.recoverAccess();
+        this.userFacade.recoverAccess(
+                this.recoverAccessConverter.convertToModel(recoverAccessDto), recoverAccessDto.getRecoveryType());
     }
 }

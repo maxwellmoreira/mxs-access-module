@@ -6,6 +6,7 @@ import com.mxs.domain.user.usecase.delete.DeleteUseCase;
 import com.mxs.domain.user.usecase.login.LoginUseCase;
 import com.mxs.domain.user.usecase.password.PasswordUseCase;
 import com.mxs.domain.user.usecase.read.ReadUseCase;
+import com.mxs.domain.user.usecase.recover.RecoverUseCase;
 import com.mxs.domain.user.usecase.update.UpdateUseCase;
 import com.mxs.factory.type.RecoveryType;
 import com.mxs.model.UserModel;
@@ -36,6 +37,9 @@ public final class UserFacade {
     @Autowired
     private PasswordUseCase passwordUseCase;
 
+    @Autowired
+    private RecoverUseCase recoverUseCase;
+
     public void createUser(final List<Optional<UserModel>> userModelOptionalList) {
         this.createUseCase.createUser(userModelOptionalList);
     }
@@ -60,7 +64,7 @@ public final class UserFacade {
         this.passwordUseCase.changePassword(userModelView);
     }
 
-    public void recoverAccess(final Optional<UserModel> userModelView, final RecoveryType recoveryType) {
-
+    public void recoverAccess(final Optional<UserModel> userModelOptional, final RecoveryType recoveryType) {
+        this.recoverUseCase.recoverAccess(userModelOptional, recoveryType);
     }
 }
