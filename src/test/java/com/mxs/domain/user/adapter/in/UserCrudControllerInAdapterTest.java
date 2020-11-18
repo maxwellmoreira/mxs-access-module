@@ -30,8 +30,8 @@ public class UserCrudControllerInAdapterTest {
         LoginDto loginFilter =
                 new LoginDto
                         .Builder()
-                        .username("maxwellmoreira")
-                        .password("maxwellmoreira")
+                        .username("usuario_1")
+                        .password("usuario1")
                         .build();
 
         ObjectMapper mapper = new ObjectMapper();
