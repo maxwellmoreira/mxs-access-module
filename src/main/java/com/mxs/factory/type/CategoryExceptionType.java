@@ -3,7 +3,7 @@ package com.mxs.factory.type;
 public enum CategoryExceptionType {
     BUSINESS("BUSINESS"),
     INFRASTRUCTURE("INFRASTRUCTURE"),
-    ILLEGAL("ILLEGAL");
+    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR");
 
     private final String code;
 

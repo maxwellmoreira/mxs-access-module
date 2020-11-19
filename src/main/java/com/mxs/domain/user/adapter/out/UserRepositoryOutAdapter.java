@@ -60,4 +60,9 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
     public Optional<UserModel> findByEmail(final String email) {
         return this.userRepository.findByEmail(email);
     }
+
+    @Override
+    public Optional<UserModel> findByUsernameOrEmail(final String username, final String email) {
+        return this.userRepository.findByUsernameOrEmail(username, email);
+    }
 }

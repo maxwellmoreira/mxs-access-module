@@ -32,6 +32,6 @@ public interface UserControllerInPort {
     @PutMapping(CHANGE_PASSWORD)
     public void changePassword(final @RequestBody ChangePasswordDto changePasswordFilter);
 
-    @PutMapping(RECOVER_ACCESS)
+    @PostMapping(RECOVER_ACCESS)
     public void recoverAccess(final @RequestBody RecoverAccessDto recoverAccessDto);
 }

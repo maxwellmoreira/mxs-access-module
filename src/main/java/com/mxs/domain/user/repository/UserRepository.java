@@ -9,11 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long>, JpaSpecificationExecutor<UserModel> {
-    Optional<UserModel> findByUsername(final String username);
-
-    Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
-
-    public Optional<UserModel> findByUsernameAndPassword(final String username, final String password);
-
+    public Optional<UserModel> findByUsername(final String username);
     public Optional<UserModel> findByEmail(final String email);
+    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
+    public Optional<UserModel> findByUsernameAndPassword(final String username, final String password);
+    public Optional<UserModel> findByUsernameOrEmail(final String username, final String email);
 }
