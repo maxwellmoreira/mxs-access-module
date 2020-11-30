@@ -8,38 +8,29 @@ import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.Set;
 
-@Entity(name = "user")
-public final class UserModel extends EntityModel {
+@Entity(name = "group")
+public final class GroupModel extends EntityModel {
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+    @Column(name = "description", nullable = false)
+    private String description;
 
-    @OneToMany(mappedBy = "userModel")
+    @OneToMany(mappedBy = "groupModel")
     Set<UserGroupModel> userGroupModelSet;
 
-    public UserModel() { super(); }
+    public GroupModel() { super(); }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getCode() { return code; }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() { return password; }
+    public String getDescription() { return description; }
 
     public StatusType getStatusType() { return super.getStatusType(); }
 
-    private UserModel(final Builder builder) {
+    private GroupModel(final Builder builder) {
         super(builder.id, builder.creationDate, builder.lastUpdateDate, StatusType.of(builder.status), builder.status);
-        this.username = builder.username;
-        this.email = builder.email;
-        this.password = builder.password;
+        this.code = builder.code;
+        this.description = builder.description;
     }
 
     public final static class Builder {
@@ -48,9 +39,8 @@ public final class UserModel extends EntityModel {
         private Date creationDate;
         private Date lastUpdateDate;
         private String status;
-        private String username;
-        private String email;
-        private String password;
+        private String code;
+        private String description;
 
         public Builder() { }
 
@@ -74,23 +64,18 @@ public final class UserModel extends EntityModel {
             return this;
         }
 
-        public Builder username(final String username) {
-            this.username = username;
+        public Builder username(final String code) {
+            this.code = code;
             return this;
         }
 
-        public Builder email(final String email) {
-            this.email = email;
+        public Builder description(final String description) {
+            this.description = description;
             return this;
         }
 
-        public Builder password(final String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserModel build() {
-            return new UserModel(this);
+        public GroupModel build() {
+            return new GroupModel(this);
         }
     }
 }
