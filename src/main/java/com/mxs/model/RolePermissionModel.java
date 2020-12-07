@@ -9,71 +9,57 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "user_group")
-public final class UserGroupModel {
-
+@Entity(name = "role_permission")
+public final class RolePermissionModel {
     @EmbeddedId
-    private UserGroupKey userGroupKey;
-
+    private RolePermissionKey rolePermissionKey;
     @ManyToOne
-    @MapsId("userId")
-    @JoinColumn(name = "user_id")
-    private UserModel userModel;
-
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
+    private RoleModel roleModel;
     @ManyToOne
-    @MapsId("groupId")
-    @JoinColumn(name = "group_id")
-    private GroupModel groupModel;
-
+    @MapsId("permissionId")
+    @JoinColumn(name = "permission_id")
+    private PermissionModel permissionModel;
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
-
     @UpdateTimestamp
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update_date", nullable = false)
     private Date lastUpdateDate;
-
     @Column(name = "status_type", nullable = false)
     private String status;
-
     @Transient
     private StatusType statusType;
 
-    public UserGroupModel() { }
+    public RolePermissionModel() { }
 
-    public UserGroupModel(final UserGroupKey userGroupKey,
-                          final UserModel userModel,
-                          final GroupModel groupModel,
-                          final Date creationDate,
-                          final Date lastUpdateDate,
-                          final String status,
-                          final StatusType statusType) {
-        this.userGroupKey = userGroupKey;
-        this.userModel = userModel;
-        this.groupModel = groupModel;
-        this.creationDate = creationDate;
-        this.lastUpdateDate = lastUpdateDate;
-        this.status = status;
+    public RolePermissionModel(final RoleModel roleModel,
+                               final PermissionModel permissionModel,
+                               final StatusType statusType) {
+        this.roleModel = roleModel;
+        this.permissionModel = permissionModel;
+        this.rolePermissionKey = new RolePermissionKey(roleModel.getId(), permissionModel.getId());
         this.statusType = statusType;
+        this.status = statusType.getCode();
     }
 
     @PrePersist
     public void onPrePersist() {
         this.status = StatusType.ACTIVE.getCode();
     }
-
     @PostLoad
     void fillTransient() {
         this.statusType = StatusType.of(status);
     }
 
+    public RoleModel getRoleModel() { return roleModel; }
+    public PermissionModel getPermissionModel() { return permissionModel; }
     public Date getCreationDate() { return creationDate; }
-
     public Date getLastUpdateDate() { return lastUpdateDate; }
-
     public StatusType getStatusType() { return statusType; }
 }

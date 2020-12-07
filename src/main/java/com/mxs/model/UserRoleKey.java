@@ -5,15 +5,15 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class UserGroupKey implements Serializable {
+public final class UserRoleKey implements Serializable {
     @Column(name = "user_id")
     private final Long userId;
 
-    @Column(name = "group_id")
-    private final Long groupId;
+    @Column(name = "role_id")
+    private final Long roleId;
 
-    public UserGroupKey(final Long userId, final Long groupId) {
+    public UserRoleKey(final Long userId, final Long roleId) {
         this.userId = userId;
-        this.groupId = groupId;
+        this.roleId = roleId;
     }
 }

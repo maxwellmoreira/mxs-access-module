@@ -4,7 +4,9 @@ import com.mxs.factory.type.StatusType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.Set;
 
 @Entity(name = "role")
 public final class RoleModel extends EntityModel {
@@ -13,6 +15,8 @@ public final class RoleModel extends EntityModel {
     private String code;
     @Column(name = "description", nullable = false)
     private String description;
+    @OneToMany(mappedBy = "roleModel")
+    private Set<UserRoleModel> userRoleModelSet;
 
     public RoleModel() { super(); }
 
@@ -21,6 +25,8 @@ public final class RoleModel extends EntityModel {
     public String getDescription() { return description; }
 
     public StatusType getStatusType() { return super.getStatusType(); }
+
+    public Set<UserRoleModel> getUserRoleModelSet() { return userRoleModelSet; }
 
     private RoleModel(final Builder builder) {
         super(builder.id, builder.creationDate, builder.lastUpdateDate, StatusType.of(builder.status), builder.status);

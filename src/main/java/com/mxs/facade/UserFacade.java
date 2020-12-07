@@ -1,6 +1,5 @@
 package com.mxs.facade;
 
-import com.mxs.domain.user.dto.RecoverAccessDto;
 import com.mxs.domain.user.usecase.create.CreateUseCase;
 import com.mxs.domain.user.usecase.delete.DeleteUseCase;
 import com.mxs.domain.user.usecase.login.LoginUseCase;

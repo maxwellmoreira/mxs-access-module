@@ -19,7 +19,7 @@ public final class UserModel extends EntityModel {
     private String password;
 
     @OneToMany(mappedBy = "userModel")
-    Set<UserGroupModel> userGroupModelSet;
+    private Set<UserRoleModel> userRoleModelSet;
 
     public UserModel() { super(); }
 
@@ -32,6 +32,8 @@ public final class UserModel extends EntityModel {
     }
 
     public String getPassword() { return password; }
+
+    public Set<UserRoleModel> getUserRoleModelSet() { return userRoleModelSet; }
 
     public StatusType getStatusType() { return super.getStatusType(); }
 
@@ -89,8 +91,6 @@ public final class UserModel extends EntityModel {
             return this;
         }
 
-        public UserModel build() {
-            return new UserModel(this);
-        }
+        public UserModel build() { return new UserModel(this); }
     }
 }
