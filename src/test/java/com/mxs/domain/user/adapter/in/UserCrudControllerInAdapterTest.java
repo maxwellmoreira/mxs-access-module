@@ -3,7 +3,7 @@ package com.mxs.domain.user.adapter.in;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mxs.domain.user.dto.LoginDto;
+import com.mxs.dto.LoginDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

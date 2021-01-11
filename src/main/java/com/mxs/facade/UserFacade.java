@@ -2,12 +2,8 @@ package com.mxs.facade;
 
 import com.mxs.domain.user.usecase.create.CreateUseCase;
 import com.mxs.domain.user.usecase.delete.DeleteUseCase;
-import com.mxs.domain.user.usecase.login.LoginUseCase;
-import com.mxs.domain.user.usecase.password.PasswordUseCase;
-import com.mxs.domain.user.usecase.read.ReadUseCase;
-import com.mxs.domain.user.usecase.recover.RecoverUseCase;
+import com.mxs.domain.user.usecase.find.FindUseCase;
 import com.mxs.domain.user.usecase.update.UpdateUseCase;
-import com.mxs.factory.type.RecoveryType;
 import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +18,7 @@ public final class UserFacade {
     private CreateUseCase createUseCase;
 
     @Autowired
-    private ReadUseCase readUseCase;
+    private FindUseCase findUseCase;
 
     @Autowired
     private UpdateUseCase updateUseCase;
@@ -30,21 +26,12 @@ public final class UserFacade {
     @Autowired
     private DeleteUseCase deleteUseCase;
 
-    @Autowired
-    private LoginUseCase loginUseCase;
-
-    @Autowired
-    private PasswordUseCase passwordUseCase;
-
-    @Autowired
-    private RecoverUseCase recoverUseCase;
-
-    public void createUser(final List<Optional<UserModel>> userModelOptionalList) {
+    public void addUser(final List<Optional<UserModel>> userModelOptionalList) {
         this.createUseCase.createUser(userModelOptionalList);
     }
 
     public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
-        return this.readUseCase.findUser(userModelOptional);
+        return this.findUseCase.findUser(userModelOptional);
     }
 
     public void updateUser(final List<Optional<UserModel>> userModelOptionalList) {
@@ -53,17 +40,5 @@ public final class UserFacade {
 
     public void removeUser(final List<Optional<UserModel>> userModelOptionalList) {
         this.deleteUseCase.removeUser(userModelOptionalList);
-    }
-
-    public Optional<UserModel> login(final Optional<UserModel> userModelOptional) {
-        return this.loginUseCase.login(userModelOptional);
-    }
-
-    public void changePassword(final Optional<UserModel> userModelView) {
-        this.passwordUseCase.changePassword(userModelView);
-    }
-
-    public void recoverAccess(final Optional<UserModel> userModelOptional, final RecoveryType recoveryType) {
-        this.recoverUseCase.recoverAccess(userModelOptional, recoveryType);
     }
 }
