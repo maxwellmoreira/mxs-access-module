@@ -12,16 +12,14 @@ import java.util.Optional;
 
 public class UserSpecificationRepository implements Specification<UserModel> {
 
-    private Optional<UserModel> userModelOptional;
+    private final Optional<UserModel> userModelOptional;
 
     public UserSpecificationRepository(final Optional<UserModel> userModelOptional) {
         this.userModelOptional = userModelOptional;
     }
 
     @Override
-    public Predicate toPredicate(Root<UserModel> root,
-                                 CriteriaQuery<?> criteriaQuery,
-                                 CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<UserModel> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
         Predicate predicate = criteriaBuilder.conjunction();
 

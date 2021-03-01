@@ -19,7 +19,10 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void createUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.get());
+        userModelOptional
+                .stream()
+                .findFirst()
+                .ifPresent(userModel -> this.userRepository.save(userModel));
     }
 
     @Override
@@ -33,12 +36,18 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
 
     @Override
     public void updateUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.save(userModelOptional.get());
+        userModelOptional
+                .stream()
+                .findFirst()
+                .ifPresent(userModel -> this.userRepository.save(userModel););
     }
 
     @Override
     public void removeUser(final Optional<UserModel> userModelOptional) {
-        this.userRepository.delete(userModelOptional.get());
+        userModelOptional
+                .stream()
+                .findFirst()
+                .ifPresent(userModel -> this.userRepository.delete(userModel));
     }
 
     @Override

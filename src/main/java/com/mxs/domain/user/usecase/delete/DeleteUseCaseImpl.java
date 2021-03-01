@@ -30,7 +30,6 @@ public final class DeleteUseCaseImpl implements DeleteUseCase {
         return userModelOptional.map(userModel ->
                 this.userRepositoryOutPort.findByUsernameAndEmail(userModel.getUsername(), userModel.getEmail()))
                 .stream()
-                .filter(user -> user.isPresent())
                 .findFirst()
                 .orElseThrow(() -> new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND));
     }
