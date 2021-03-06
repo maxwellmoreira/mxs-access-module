@@ -7,8 +7,6 @@ import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public final class LoginUseCaseImpl implements LoginUseCase {
 
@@ -16,11 +14,9 @@ public final class LoginUseCaseImpl implements LoginUseCase {
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public Optional<UserModel> login(final Optional<UserModel> userModelOptional) {
-        return userModelOptional.map(userModel ->
-                this.userRepositoryOutPort.findByUsernameAndPassword(userModel.getUsername(), userModel.getPassword()))
+    public UserModel login(final UserModel userModel) {
+        return this.userRepositoryOutPort.findByUsernameAndPassword(userModel.getUsername(), userModel.getPassword())
                 .stream()
-                .filter(user -> user.isPresent())
                 .findFirst()
                 .orElseThrow(() -> new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND));
     }

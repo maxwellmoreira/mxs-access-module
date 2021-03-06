@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
@@ -18,36 +17,28 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
     private UserRepository userRepository;
 
     @Override
-    public void createUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional
-                .stream()
-                .findFirst()
-                .ifPresent(userModel -> this.userRepository.save(userModel));
+    public void createUser(final UserModel userModel) {
+        this.userRepository.save(userModel);
     }
 
     @Override
-    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
-        return this.userRepository
-                .findAll(new UserSpecificationRepository(userModelOptional))
-                .stream()
-                .map(Optional::of)
-                .collect(Collectors.toList());
+    public List<UserModel> findUser(final UserModel userModel) {
+        return this.userRepository.findAll(new UserSpecificationRepository(userModel));
     }
 
     @Override
-    public void updateUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional
-                .stream()
-                .findFirst()
-                .ifPresent(userModel -> this.userRepository.save(userModel););
+    public void updateUser(final UserModel userModel) {
+        this.userRepository.save(userModel);
     }
 
     @Override
-    public void removeUser(final Optional<UserModel> userModelOptional) {
-        userModelOptional
-                .stream()
-                .findFirst()
-                .ifPresent(userModel -> this.userRepository.delete(userModel));
+    public void removeUser(final UserModel userModel) {
+        this.userRepository.delete(userModel);
+    }
+
+    @Override
+    public Optional<UserModel> findByEmail(final String email) {
+        return this.userRepository.findByEmail(email);
     }
 
     @Override
@@ -56,18 +47,13 @@ public class UserRepositoryOutAdapter implements UserRepositoryOutPort {
     }
 
     @Override
-    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email) {
-        return this.userRepository.findByUsernameAndEmail(username, email);
-    }
-
-    @Override
     public Optional<UserModel> findByUsernameAndPassword(final String username, final String password) {
         return this.userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override
-    public Optional<UserModel> findByEmail(final String email) {
-        return this.userRepository.findByEmail(email);
+    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email) {
+        return this.userRepository.findByUsernameAndEmail(username, email);
     }
 
     @Override

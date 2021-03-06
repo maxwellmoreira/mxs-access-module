@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public final class DeleteUseCaseImpl implements DeleteUseCase {
@@ -17,18 +16,17 @@ public final class DeleteUseCaseImpl implements DeleteUseCase {
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public void removeUser(final List<Optional<UserModel>> userModelOptionalList) {
-        userModelOptionalList.stream().forEach(this::remove);
+    public void removeUser(final List<UserModel> userModelList) {
+        userModelList.forEach(this::remove);
     }
 
-    private void remove(final Optional<UserModel> userModelOptional) {
-        Optional<UserModel> userFounded = findUserByUsernameAndEmail(userModelOptional);
+    private void remove(final UserModel userModel) {
+        UserModel userFounded = findUserByUsernameAndEmail(userModel);
         this.userRepositoryOutPort.removeUser(userFounded);
     }
 
-    private Optional<UserModel> findUserByUsernameAndEmail(final Optional<UserModel> userModelOptional) {
-        return userModelOptional.map(userModel ->
-                this.userRepositoryOutPort.findByUsernameAndEmail(userModel.getUsername(), userModel.getEmail()))
+    private UserModel findUserByUsernameAndEmail(final UserModel userModel) {
+        return this.userRepositoryOutPort.findByUsernameAndEmail(userModel.getUsername(), userModel.getEmail())
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND));

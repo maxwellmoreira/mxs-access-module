@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public final class UserFacade {
@@ -26,19 +25,19 @@ public final class UserFacade {
     @Autowired
     private DeleteUseCase deleteUseCase;
 
-    public void addUser(final List<Optional<UserModel>> userModelOptionalList) {
-        this.createUseCase.createUser(userModelOptionalList);
+    public void addUser(final List<UserModel> userModelList) {
+        this.createUseCase.createUser(userModelList);
     }
 
-    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
-        return this.findUseCase.findUser(userModelOptional);
+    public List<UserModel> findUser(final UserModel userModel) {
+        return this.findUseCase.findUser(userModel);
     }
 
-    public void updateUser(final List<Optional<UserModel>> userModelOptionalList) {
-        this.updateUseCase.updateUser(userModelOptionalList);
+    public void updateUser(final List<UserModel> userModelList) {
+        this.updateUseCase.updateUser(userModelList);
     }
 
-    public void removeUser(final List<Optional<UserModel>> userModelOptionalList) {
-        this.deleteUseCase.removeUser(userModelOptionalList);
+    public void removeUser(final List<UserModel> userModelList) {
+        this.deleteUseCase.removeUser(userModelList);
     }
 }

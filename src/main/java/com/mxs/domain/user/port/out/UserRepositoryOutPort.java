@@ -6,21 +6,21 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepositoryOutPort {
-    public void createUser(final Optional<UserModel> userModelOptional);
+    void createUser(final UserModel userModel);
 
-    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional);
+    List<UserModel> findUser(final UserModel userModel);
 
-    public void updateUser(final Optional<UserModel> userModelOptional);
+    void updateUser(final UserModel userModel);
 
-    public void removeUser(final Optional<UserModel> userModelOptional);
+    void removeUser(final UserModel userModel);
 
-    public Optional<UserModel> findByUsername(final String username);
+    Optional<UserModel> findByEmail(final String email);
 
-    public Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
+    Optional<UserModel> findByUsername(final String username);
 
-    public Optional<UserModel> findByUsernameAndPassword(final String username, final String password);
+    Optional<UserModel> findByUsernameAndPassword(final String username, final String password);
 
-    public Optional<UserModel> findByEmail(final String email);
+    Optional<UserModel> findByUsernameAndEmail(final String username, final String email);
 
-    public Optional<UserModel> findByUsernameOrEmail(final String username, final String email);
+    Optional<UserModel> findByUsernameOrEmail(final String username, final String email);
 }

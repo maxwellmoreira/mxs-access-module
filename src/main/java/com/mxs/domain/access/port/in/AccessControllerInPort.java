@@ -4,22 +4,23 @@ import com.mxs.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import static com.mxs.factory.constant.ModelControllerConstant.ACCESSES;
+import static com.mxs.factory.constant.UriControllerConstant.REGISTER;
+import static com.mxs.factory.constant.UriControllerConstant.LOGIN;
+import static com.mxs.factory.constant.UriControllerConstant.CHANGE_PASSWORD;
+import static com.mxs.factory.constant.UriControllerConstant.RECOVER_ACCESS;
 
-import static com.mxs.factory.constant.ModelControllerConstant.ACCESS;
-import static com.mxs.factory.constant.UriControllerConstant.*;
-
-@RequestMapping(ACCESS)
+@RequestMapping(ACCESSES)
 public interface AccessControllerInPort {
     @PostMapping(REGISTER)
-    public void registerUser(final @RequestBody List<UserDto> userDtoList);
+    void registerUser(final @RequestBody RegisterDto registerDto);
 
     @PostMapping(LOGIN)
-    public ResponseEntity<LoginResponseDto> loginUser(final @RequestBody LoginDto loginDto);
+    ResponseEntity<LoginResponseDto> loginUser(final @RequestBody LoginDto loginDto);
 
     @PutMapping(CHANGE_PASSWORD)
-    public void changePassword(final @RequestBody ChangePasswordDto changePasswordDto);
+    void changePassword(final @RequestBody ChangePasswordDto changePasswordDto);
 
-    @DeleteMapping(RECOVER)
-    public void recoverAccess(final @RequestBody RecoverAccessDto recoverAccessDto);
+    @DeleteMapping(RECOVER_ACCESS)
+    void recoverAccess(final @RequestBody RecoverAccessDto recoverAccessDto);
 }

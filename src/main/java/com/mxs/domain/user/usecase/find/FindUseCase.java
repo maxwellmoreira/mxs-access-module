@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FindUseCase {
-    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional);
+    List<UserModel> findUser(final UserModel userModel);
 }

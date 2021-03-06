@@ -15,7 +15,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.util.StringUtils.hasText;
 
@@ -38,9 +37,9 @@ public class JwtFilterSecurityFactory extends GenericFilterBean {
         if (token != null && jwtProviderSecurityFactory.validateToken(token)) {
             String userLogin = jwtProviderSecurityFactory.getLoginFromToken(token);
             UserModel userModel = new UserModel.Builder().username(userLogin).build();
-            List<Optional<UserModel>> userModelOptionalList = this.userFacade.findUser(Optional.of(userModel));
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            //List<UserModel> userModelOptionalList = this.userFacade.findUser(userModel);
+            //UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+            //SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

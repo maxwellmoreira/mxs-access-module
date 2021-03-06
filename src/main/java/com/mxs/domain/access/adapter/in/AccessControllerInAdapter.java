@@ -3,21 +3,24 @@ package com.mxs.domain.access.adapter.in;
 import com.mxs.domain.access.converter.ChangePasswordConverter;
 import com.mxs.domain.access.converter.LoginConverter;
 import com.mxs.domain.access.converter.RecoverAccessConverter;
+import com.mxs.domain.access.converter.RegisterConverter;
 import com.mxs.domain.access.port.in.AccessControllerInPort;
 import com.mxs.dto.*;
 import com.mxs.facade.AccessFacade;
+import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public final class AccessControllerInAdapter implements AccessControllerInPort {
 
     @Autowired
     private AccessFacade accessFacade;
+
+    @Autowired
+    private RegisterConverter registerConverter;
 
     @Autowired
     private LoginConverter loginConverter;
@@ -29,8 +32,9 @@ public final class AccessControllerInAdapter implements AccessControllerInPort {
     private RecoverAccessConverter recoverAccessConverter;
 
     @Override
-    public void registerUser(final List<UserDto> userDtoList) {
-        this.accessFacade.createUser(this.userConverter.convertToModelList(userDtoList));
+    public void registerUser(final RegisterDto registerDto) {
+        UserModel userModel = this.registerConverter.convertToModel(registerDto);
+        this.accessFacade.registerUser(userModel);
     }
 
     @Override
@@ -41,12 +45,13 @@ public final class AccessControllerInAdapter implements AccessControllerInPort {
 
     @Override
     public void changePassword(final ChangePasswordDto changePasswordDto) {
-        this.accessFacade.changePassword(this.changePasswordConverter.convertToModel(changePasswordDto));
+        UserModel userModel = this.changePasswordConverter.convertToModel(changePasswordDto);
+        this.accessFacade.changePassword(userModel);
     }
 
     @Override
     public void recoverAccess(final RecoverAccessDto recoverAccessDto) {
-        this.accessFacade.recoverAccess(
-                this.recoverAccessConverter.convertToModel(recoverAccessDto), recoverAccessDto.getRecoveryType());
+        UserModel userModel = this.recoverAccessConverter.convertToModel(recoverAccessDto);
+        this.accessFacade.recoverAccess(userModel, recoverAccessDto.getRecoveryType());
     }
 }

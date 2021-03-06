@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DeleteUseCase {
-    public void removeUser(final List<Optional<UserModel>> userModelOptionalList);
+    void removeUser(final List<UserModel> userModelList);
 }

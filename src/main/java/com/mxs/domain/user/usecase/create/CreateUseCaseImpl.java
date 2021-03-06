@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public final class CreateUseCaseImpl implements CreateUseCase {
@@ -17,19 +16,19 @@ public final class CreateUseCaseImpl implements CreateUseCase {
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public void createUser(final List<Optional<UserModel>> userModelOptionalList) {
-        userModelOptionalList.stream().forEach(this::create);
+    public void createUser(final List<UserModel> userModelList) {
+        userModelList.forEach(this::create);
     }
 
-    private void create(final Optional<UserModel> userModelOptional) {
-        usernameExists(userModelOptional);
-        this.userRepositoryOutPort.createUser(userModelOptional);
+    private void create(final UserModel userModel) {
+        usernameExists(userModel);
+        this.userRepositoryOutPort.createUser(userModel);
     }
 
-    private void usernameExists(final Optional<UserModel> userModelOptional) {
-        userModelOptional.map(userModel -> this.userRepositoryOutPort.findByUsername(userModel.getUsername()))
+    private void usernameExists(final UserModel userModel) {
+        this.userRepositoryOutPort.findByUsername(userModel.getUsername())
                 .stream()
                 .findFirst()
-                .ifPresent(userModel -> new ResourceExistsException(MessageExceptionType.USERNAME_EXISTS));
+                .ifPresent(user -> { throw new ResourceExistsException(MessageExceptionType.USERNAME_EXISTS); });
     }
 }

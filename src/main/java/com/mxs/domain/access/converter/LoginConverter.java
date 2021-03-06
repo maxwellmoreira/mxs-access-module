@@ -6,32 +6,30 @@ import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public final class LoginConverter implements ConverterFactory<LoginDto, UserModel> {
     @Override
-    public LoginDto convertToDto(Optional<UserModel> userModelOptional) {
+    public LoginDto convertToDto(UserModel userModel) {
         return null;
     }
 
     @Override
-    public Optional<UserModel> convertToModel(final LoginDto loginDto) {
-        return Optional.of(
-                new UserModel
-                        .Builder()
-                        .username(Optional.ofNullable(loginDto.getUsername()).orElse(null))
-                        .password(Optional.ofNullable(loginDto.getPassword()).orElse(null))
-                        .build());
+    public UserModel convertToModel(final LoginDto loginDto) {
+        return new UserModel
+                .Builder()
+                .username(loginDto.getUsername())
+                .password(loginDto.getPassword())
+                .build();
     }
 
     @Override
-    public List<LoginDto> convertToDtoList(final List<Optional<UserModel>> userModelOptionalList) {
+    public List<LoginDto> convertToDtoList(final List<UserModel> userModelList) {
         return null;
     }
 
     @Override
-    public List<Optional<UserModel>> convertToModelList(final List<LoginDto> loginDtoList) {
+    public List<UserModel> convertToModelList(final List<LoginDto> loginDtoList) {
         return null;
     }
 }

@@ -6,33 +6,32 @@ import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public final class SearchConverter implements ConverterFactory<SearchDto, UserModel> {
+
     @Override
-    public SearchDto convertToDto(final Optional<UserModel> userModelOptional) {
+    public SearchDto convertToDto(final UserModel userModel) {
         return null;
     }
 
     @Override
-    public Optional<UserModel> convertToModel(final SearchDto searchDto) {
-        return Optional.of(
-                new UserModel
-                        .Builder()
-                        .username(Optional.ofNullable(searchDto.getUsername()).orElse(null))
-                        .email(Optional.ofNullable(searchDto.getEmail()).orElse(null))
-                        .status(Optional.ofNullable(searchDto.getStatus()).orElse(null))
-                        .build());
+    public UserModel convertToModel(final SearchDto searchDto) {
+        return new UserModel
+                .Builder()
+                .username(searchDto.getUsername())
+                .email(searchDto.getEmail())
+                .status(searchDto.getStatus())
+                .build();
     }
 
     @Override
-    public List<SearchDto> convertToDtoList(final List<Optional<UserModel>> userModelOptionalList) {
+    public List<SearchDto> convertToDtoList(final List<UserModel> userModelList) {
         return null;
     }
 
     @Override
-    public List<Optional<UserModel>> convertToModelList(final List<SearchDto> searchDtoList) {
+    public List<UserModel> convertToModelList(final List<SearchDto> searchDtoList) {
         return null;
     }
 }

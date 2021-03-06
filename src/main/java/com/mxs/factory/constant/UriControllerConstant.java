@@ -4,5 +4,5 @@ public final class UriControllerConstant {
     public static final String REGISTER = "/register";
     public static final String LOGIN = "/login";
     public static final String CHANGE_PASSWORD = "/change-password";
-    public static final String RECOVER = "/recover";
+    public static final String RECOVER_ACCESS = "/recover-access";
 }

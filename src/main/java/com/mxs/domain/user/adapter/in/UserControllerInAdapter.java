@@ -30,8 +30,7 @@ public final class UserControllerInAdapter implements UserControllerInPort {
 
         final List<UserDto> userDtoList =
                 this.userConverter.convertToDtoList(
-                        this.userFacade.findUser(
-                                this.userConverter.convertToModel(userDto)));
+                        this.userFacade.findUser(this.userConverter.convertToModel(userDto)));
 
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }

@@ -12,10 +12,10 @@ import java.util.Optional;
 
 public class UserSpecificationRepository implements Specification<UserModel> {
 
-    private final Optional<UserModel> userModelOptional;
+    private final UserModel userModel;
 
-    public UserSpecificationRepository(final Optional<UserModel> userModelOptional) {
-        this.userModelOptional = userModelOptional;
+    public UserSpecificationRepository(final UserModel userModel) {
+        this.userModel = userModel;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class UserSpecificationRepository implements Specification<UserModel> {
 
         Predicate predicate = criteriaBuilder.conjunction();
 
-        this.userModelOptional
+        Optional.ofNullable(userModel)
                 .map(UserModel::getUsername)
                 .ifPresent(username -> {
                     if (!username.isBlank())
@@ -31,7 +31,7 @@ public class UserSpecificationRepository implements Specification<UserModel> {
                                 .add(criteriaBuilder.like(root.get("username"), "%" + username + "%"));
                 });
 
-        this.userModelOptional
+        Optional.ofNullable(userModel)
                 .map(UserModel::getEmail)
                 .ifPresent(email -> {
                     if (!email.isBlank())
@@ -39,7 +39,7 @@ public class UserSpecificationRepository implements Specification<UserModel> {
                                 .add(criteriaBuilder.like(root.get("email"), "%" + email + "%"));
                 });
 
-        this.userModelOptional
+        Optional.ofNullable(userModel)
                 .map(UserModel::getStatusType)
                 .map(StatusType::getCode)
                 .ifPresent(code -> {

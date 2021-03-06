@@ -6,32 +6,30 @@ import com.mxs.model.UserModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class RecoverAccessConverter implements ConverterFactory<RecoverAccessDto, UserModel> {
     @Override
-    public RecoverAccessDto convertToDto(final Optional<UserModel> userModelOptional) {
+    public RecoverAccessDto convertToDto(final UserModel userModel) {
         return null;
     }
 
     @Override
-    public Optional<UserModel> convertToModel(final RecoverAccessDto recoverAccessDto) {
-        return Optional.of(
-                new UserModel
-                        .Builder()
-                        .username(Optional.ofNullable(recoverAccessDto.getUsername()).orElse(null))
-                        .email(Optional.ofNullable(recoverAccessDto.getEmail()).orElse(null))
-                        .build());
+    public UserModel convertToModel(final RecoverAccessDto recoverAccessDto) {
+        return new UserModel
+                .Builder()
+                .username(recoverAccessDto.getUsername())
+                .email(recoverAccessDto.getEmail())
+                .build();
     }
 
     @Override
-    public List<RecoverAccessDto> convertToDtoList(final List<Optional<UserModel>> modelOptionalList) {
+    public List<RecoverAccessDto> convertToDtoList(final List<UserModel> userModelList) {
         return null;
     }
 
     @Override
-    public List<Optional<UserModel>> convertToModelList(final List<RecoverAccessDto> recoverAccessDtos) {
+    public List<UserModel> convertToModelList(final List<RecoverAccessDto> recoverAccessDtos) {
         return null;
     }
 }

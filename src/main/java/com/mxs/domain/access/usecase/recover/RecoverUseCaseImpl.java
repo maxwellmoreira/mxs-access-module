@@ -9,8 +9,6 @@ import com.mxs.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public final class RecoverUseCaseImpl implements RecoverUseCase {
 
@@ -21,16 +19,14 @@ public final class RecoverUseCaseImpl implements RecoverUseCase {
     private EmailUtil emailUtil;
 
     @Override
-    public void recoverAccess(final Optional<UserModel> userModelOptional, final RecoveryType recoveryType) {
-        Optional<UserModel> userModel = findUserByUsernameOrEmail(userModelOptional);
-        userModel.ifPresent(user -> this.emailUtil.sendEmailWithoutAttachment(user.getEmail()));
+    public void recoverAccess(final UserModel userModel, final RecoveryType recoveryType) {
+        UserModel user = findUserByUsernameOrEmail(userModel);
+        this.emailUtil.sendEmailWithoutAttachment(user.getEmail());
     }
 
-    private Optional<UserModel> findUserByUsernameOrEmail(final Optional<UserModel> userModelOptional) {
-        return userModelOptional.map(userModel ->
-                this.userRepositoryOutPort.findByUsernameOrEmail(userModel.getUsername(), userModel.getEmail()))
+    private UserModel findUserByUsernameOrEmail(final UserModel userModel) {
+        return this.userRepositoryOutPort.findByUsernameOrEmail(userModel.getUsername(), userModel.getEmail())
                 .stream()
-                .filter(user -> user.isPresent())
                 .findFirst()
                 .orElseThrow(() -> new ResourceExistsException(MessageExceptionType.USER_NOT_FOUND));
     }

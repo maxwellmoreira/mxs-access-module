@@ -15,7 +15,7 @@ public final class FindUseCaseImpl implements FindUseCase {
     private UserRepositoryOutPort userRepositoryOutPort;
 
     @Override
-    public List<Optional<UserModel>> findUser(final Optional<UserModel> userModelOptional) {
-        return this.userRepositoryOutPort.findUser(userModelOptional);
+    public List<UserModel> findUser(final UserModel userModel) {
+        return this.userRepositoryOutPort.findUser(userModel);
     }
 }

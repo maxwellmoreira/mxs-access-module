@@ -5,11 +5,11 @@ import java.util.Optional;
 
 public interface ConverterFactory<DTO, MODEL> {
 
-    public DTO convertToDto(final Optional<MODEL> modelOptional);
+    DTO convertToDto(final MODEL model);
 
-    public Optional<MODEL> convertToModel(final DTO dto);
+    MODEL convertToModel(final DTO dto);
 
-    public List<DTO> convertToDtoList(final List<Optional<MODEL>> modelOptionalList);
+    List<DTO> convertToDtoList(final List<MODEL> modelList);
 
-    public List<Optional<MODEL>> convertToModelList(final List<DTO> dtoList);
+    List<MODEL> convertToModelList(final List<DTO> dtoList);
 }
